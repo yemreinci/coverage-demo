@@ -15,12 +15,12 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: compile
-      run: g++ main.cpp foo.cpp -oa --coverage
+      run: cmake -B build -S . && cmake --build build
       
     - name: run
-      run: ./a
+      run: ./build/test
       
     - name: collect coverage
-      run: sudo apt-get install gcovr && gcovr --xml-pretty -o report.xml -e $(pwd)/main.cpp -r $(pwd) $(pwd)
+      run: sudo apt-get install gcovr && gcovr --xml-pretty -o report.xml -r $(pwd)/src $(pwd)
       
     - uses: codecov/codecov-action@v2.0.2
