@@ -21,6 +21,6 @@ jobs:
       run: ./build/test
       
     - name: collect coverage
-      run: sudo apt-get install gcovr && gcovr --xml-pretty -o report.xml -r $(pwd)/src $(pwd)
+      run: sudo apt-get install gcovr && gcovr --xml-pretty -o report.xml -r $(pwd)/src $(pwd) --exclude-throw-branches
       
     - uses: codecov/codecov-action@v2.0.2
