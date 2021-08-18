@@ -23,6 +23,4 @@ jobs:
     - name: collect coverage
       run: gcovr --xml-pretty -o report.xml -e main.cpp
       
-    - name: Codecov
-
     - uses: codecov/codecov-action@v2.0.2
