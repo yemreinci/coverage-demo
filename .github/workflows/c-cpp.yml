@@ -21,6 +21,6 @@ jobs:
       run: ./a
       
     - name: collect coverage
-      run: sudo apt-get install gcovr && gcovr --xml-pretty -o report.xml -e main.cpp
+      run: sudo apt-get install gcovr && gcovr --xml-pretty -o report.xml -e $(pwd)/main.cpp -r $(pwd) $(pwd)
       
     - uses: codecov/codecov-action@v2.0.2
