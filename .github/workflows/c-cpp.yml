@@ -21,15 +21,22 @@ jobs:
       run: ./build/test
       
     - name: collect coverage
-      run: sudo apt-get install lcov && lcov -c -d . -o coverage.info --no-external &&  lcov --list coverage.info
-      
+      run: |
+        sudo apt-get install lcov
+        lcov -c -d . -o coverage.info --no-external
+        lcov --list coverage.info
+        genhtml coverage.info --output-directory=coverage-report
+    
+    - name: upload coverage htmls
+    - uses: actions/upload-artifact@v2
+      with:
+        name: coverage-report
+        path: |
+          coverage.info
+          coverage-report/
+
     - uses: codecov/codecov-action@v2.0.2
       with:
         files: coverage.info
     
-    - name: Report code coverage
-      uses: zgosalvez/github-actions-report-lcov@v1
-      with:
-        coverage-files: coverage.info
-        artifact-name: code-coverage-report
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+    
