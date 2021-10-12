@@ -38,3 +38,9 @@ jobs:
     - uses: codecov/codecov-action@v2.0.2
       with:
         files: coverage.info
+
+    - name: Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: coverage.info
