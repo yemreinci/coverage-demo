@@ -23,8 +23,8 @@ jobs:
     - name: collect coverage
       run: |
         sudo apt-get install lcov
-        lcov -c -d . -o coverage.info --no-external
-        lcov --list coverage.info
+        lcov -c -d . -o coverage.info --no-external --rc lcov_branch_coverage=1
+        lcov --list coverage.info --rc lcov_branch_coverage=1
         genhtml coverage.info --output-directory=coverage-report
     
     - name: upload coverage htmls
@@ -38,5 +38,3 @@ jobs:
     - uses: codecov/codecov-action@v2.0.2
       with:
         files: coverage.info
-    
-    
